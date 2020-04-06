@@ -16,8 +16,7 @@ public class PointServiceFakeImpl implements IPointService {
 
     @Override
     public Point create(Point point) {
-        this.data.getPoints().add(point);
-        return point;
+        return this.data.setPoint(point);
     }
 
     @Override
