@@ -1,12 +1,16 @@
 package com.pro.cement.dataset;
 
 
+import com.pro.cement.model.Cadr;
 import com.pro.cement.model.Camera;
 import com.pro.cement.model.Point;
 import com.pro.cement.model.ViewPlace;
 import org.bson.codecs.pojo.Convention;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +34,28 @@ public class TestData {
                    new Camera("1", "iVue-IPC-IT10F36-10", points.get(1), ViewPlace.BOTTOM, "")
            )
    );
+
+   private List<Path> paths = new ArrayList<>(
+     Arrays.asList()
+   );
+
+
+    private List<Cadr>  cadrs = new ArrayList<>(
+            Arrays.asList(
+
+
+                    new Cadr("1", "c1.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("2", "c2.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("3", "c3.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("4", "c4.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("5", "c5.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage"))
+            )
+
+    );
+
+    //------------------------------------------------------------------------------------
+
+
 
     public List<Point> getPoints() {
         return points;
@@ -72,4 +98,10 @@ public class TestData {
         cameras.remove(camera);
         return camera;
     }
+
+
+
+
+
+
 }
