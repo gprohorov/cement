@@ -25,7 +25,8 @@ public class CadrServiceFakeImpl implements ICadrService {
 
     @Override
     public Cadr get(String id) {
-        return null;
+        return  this.getAll().stream().filter(item->item.getId().equals(id))
+                .findFirst().orElse(null);
     }
 
     @Override
@@ -40,6 +41,6 @@ public class CadrServiceFakeImpl implements ICadrService {
 
     @Override
     public List<Cadr> getAll() {
-        return null;
+        return data.getCadrs();
     }
 }

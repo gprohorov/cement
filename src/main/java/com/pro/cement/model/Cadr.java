@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -99,6 +100,10 @@ public class Cadr {   //  кадр, который снимает камеры �
 
     public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+
+    public Path getUrl(){
+        return Paths.get(this.getPath().toString(), this.getName());
     }
 
     @Override

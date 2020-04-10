@@ -1,10 +1,7 @@
 package com.pro.cement.dataset;
 
 
-import com.pro.cement.model.Cadr;
-import com.pro.cement.model.Camera;
-import com.pro.cement.model.Point;
-import com.pro.cement.model.ViewPlace;
+import com.pro.cement.model.*;
 import org.bson.codecs.pojo.Convention;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +48,12 @@ public class TestData {
                     new Cadr("5", "c5.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage"))
             )
 
+    );
+
+
+    private List<Processing>  processings = new ArrayList<>(
+
+            Arrays.asList()
     );
 
     //------------------------------------------------------------------------------------
@@ -100,8 +103,35 @@ public class TestData {
     }
 
 
+    public List<Camera> getCameras() {
+        return cameras;
+    }
 
+    public void setCameras(List<Camera> cameras) {
+        this.cameras = cameras;
+    }
 
+    public List<Path> getPaths() {
+        return paths;
+    }
 
+    public void setPaths(List<Path> paths) {
+        this.paths = paths;
+    }
 
+    public List<Cadr> getCadrs() {
+        return cadrs;
+    }
+
+    public void setCadrs(List<Cadr> cadrs) {
+        this.cadrs = cadrs;
+    }
+
+    public List<Processing> getProcessings() {
+        return processings;
+    }
+
+    public void setProcessings(List<Processing> processings) {
+        this.processings = processings;
+    }
 }
