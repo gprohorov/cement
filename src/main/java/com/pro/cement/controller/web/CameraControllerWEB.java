@@ -67,4 +67,30 @@ public class CameraControllerWEB {
         return "redirect:/web/camera/get/list";
     }
 
+    //------------------- Camera -----------------------
+
+    @RequestMapping("/start")
+    public String set(){
+        cameraServiceFake.startStop();
+        return "/index";
+    }
+
+    @RequestMapping("/setStart")
+    public String setStart(){
+        cameraServiceFake.setBooleanCamera(true);
+        return "redirect:/";
+    }
+    @RequestMapping("/setStop")
+    public String setStop(){
+        cameraServiceFake.setBooleanCamera(false);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/getlist")
+    public String getList(Model model){
+        //List<String> list = cameraServiceFake.getPhoto();
+        //model.addAttribute("list", list);
+        return "/list";
+    }
+
 }
