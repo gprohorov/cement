@@ -1,9 +1,7 @@
 package com.pro.cement.controller.rest;
 
 
-import com.pro.cement.model.Generic;
 import com.pro.cement.model.Processing;
-import com.pro.cement.service.generic.impls.GenericServiceImpl;
 import com.pro.cement.service.processing.impls.ProcessingServiceFakeImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
