@@ -32,7 +32,7 @@ public class ProcessingControllerREST {
 
     @RequestMapping("/success")
     String success() throws IOException {
-        return service.identify();
+        return service.identifyOne("c1.png");
     }
 
 }
