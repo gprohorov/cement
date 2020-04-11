@@ -24,8 +24,11 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
     public String identify() throws IOException {
       //  Cadr cadr = cadrService.get(cadrId);
         //Path pathname = cadr.getUrl();
-        String url = "/storage/c1.png";
 
+        String userDirectory = new File("").getAbsolutePath();
+        System.out.println(userDirectory);
+    //    String url = "/home/george/IdeaProjects/cement/storage/c1.png";
+        String url = userDirectory + "/storage/c1.png";
         BufferedImage image = ImageIO.read(new File(url));
         System.out.println(image.getHeight());
 
