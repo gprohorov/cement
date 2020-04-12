@@ -3,6 +3,7 @@ package com.pro.cement.controller.rest;
 
 import com.pro.cement.model.Processing;
 import com.pro.cement.service.processing.impls.ProcessingServiceFakeImpl;
+import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +32,8 @@ public class ProcessingControllerREST {
     }
 
     @RequestMapping("/success")
-    String success() throws IOException {
-        return service.identifyOne("c1.png");
+    String success() throws IOException, TesseractException {
+        return service.identifyOne("c0.png");
     }
 
 }

@@ -1,10 +1,9 @@
 package com.pro.cement.service.processing.impls;
 
-import com.pro.cement.model.Cadr;
 import com.pro.cement.model.Processing;
 import com.pro.cement.service.cadr.impls.CadrServiceFakeImpl;
 import com.pro.cement.service.processing.interfaces.IProcessingService;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +12,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 
 import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
 
 @Service
 public class ProcessingServiceFakeImpl implements IProcessingService {
@@ -26,33 +23,42 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
     @Autowired
     CadrServiceFakeImpl cadrService;
 
-    private Tesseract tesseract = new Tesseract();;
+    private final Tesseract tesseract;
+    private final     String testdata;
+    private final     String dir;
 
-
-    //
-    @PostConstruct
-    private void init(){
+    public ProcessingServiceFakeImpl() {
+        String userDirectory = new File("").getAbsolutePath();
+        this.testdata  = userDirectory + "/testdata";
+        this.tesseract =  new Tesseract();
+        this.dir = userDirectory + "/storage";
+        tesseract.setDatapath(this.testdata);
         tesseract.setLanguage("digits_comma");
+      //  tesseract.setPageSegMode(1);
+       // tesseract.setOcrEngineMode(1);
     }
 
-    public String identifyOne(String img) throws IOException {
-      //  Cadr cadr = cadrService.get(cadrId);
-        //Path pathname = cadr.getUrl();
+
+    public String identifyOne(String img) throws IOException, TesseractException {
 
         String userDirectory = new File("").getAbsolutePath();
         System.out.println(userDirectory);
-    //    String url = "/home/george/IdeaProjects/cement/storage/c1.png";
-        String url = userDirectory + "/storage/" + img;
-        BufferedImage image = ImageIO.read(new File(url));
-        System.out.println(image.getHeight());
+        String url = this.dir + "/" + img;
+       // BufferedImage image = ImageIO.read(new File(url));
+        //System.out.println(image.getHeight());
 
-        return "success";
+        return this.thesaurus(url);
     }
 
-    private String thesaurus(BufferedImage image){
+    private String thesaurus(String url) throws TesseractException {
+        File file = new File(url);
+        String text  = tesseract.doOCR(file);
 
+        if (text != null) {
+            text = text.replace(" ","");
+        }
 
-        return null;
+        return (text != null) ? text : "File not found";
     }
 
 
