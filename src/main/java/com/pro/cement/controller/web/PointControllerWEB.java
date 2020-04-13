@@ -3,6 +3,7 @@ package com.pro.cement.controller.web;
 
 import com.pro.cement.model.Point;
 import com.pro.cement.service.point.interfaces.IPointService;
+import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ public class PointControllerWEB {
     IPointService service;
 
     @RequestMapping("/get/list")
-    String showAll(Model model) throws IOException {
+    String showAll(Model model) throws IOException, TesseractException {
         
         List<Point> list = service.getAll();
         model.addAttribute("list", list);

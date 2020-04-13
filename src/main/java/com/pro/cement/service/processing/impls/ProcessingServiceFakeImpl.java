@@ -1,5 +1,6 @@
 package com.pro.cement.service.processing.impls;
 
+import com.pro.cement.dataset.TestData;
 import com.pro.cement.model.Cadr;
 import com.pro.cement.model.Processing;
 import com.pro.cement.service.cadr.impls.CadrServiceFakeImpl;
@@ -21,14 +22,18 @@ import net.sourceforge.tess4j.Tesseract;
 @Service
 public class ProcessingServiceFakeImpl implements IProcessingService {
 
-    @Autowired
-    CadrServiceFakeImpl cadrService;
+
+    final private CadrServiceFakeImpl cadrService;
+    final private TestData data;
 
     private final Tesseract tesseract;
     private final     String testdata;
     private final     String dir;
 
-    public ProcessingServiceFakeImpl() {
+    @Autowired
+    public ProcessingServiceFakeImpl(CadrServiceFakeImpl cadrService, TestData data) throws IOException, TesseractException {
+        this.cadrService = cadrService;
+        this.data = data;
         String userDirectory = new File("").getAbsolutePath();
         this.testdata  = userDirectory + "/testdata";
         this.tesseract =  new Tesseract();
@@ -37,6 +42,7 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
         tesseract.setLanguage("digits_comma");
       //  tesseract.setPageSegMode(1);
        // tesseract.setOcrEngineMode(1);
+        this.identifyDirectory();
     }
 
     public List<Processing> identifyDirectory() throws IOException, TesseractException{
@@ -46,10 +52,8 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
         AtomicReference<String> recognition = new AtomicReference<>("Failed");
 
         cadrs.stream().forEach(cadr -> {
-
-            String url = cadr.getUrl().toString();
             try {
-                recognition.set(this.identifyOne(url));
+                recognition.set(this.identifyOne(cadr.getPath()));
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (TesseractException e) {
@@ -64,7 +68,7 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
             processings.add(processing);
 
         });
-
+        this.data.setProcessings(processings);
         return  processings;
     }
 
@@ -118,6 +122,6 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
 
     @Override
     public List<Processing> getAll() {
-        return null;
+        return data.getProcessings();
     }
 }

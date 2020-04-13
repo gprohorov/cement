@@ -53,15 +53,15 @@ public class CadrServiceFakeImpl implements ICadrService {
     public List<Cadr> getAll() throws IOException {
         List<Cadr> cadr = data.getCadrs();
 
-        String userDirectory = new File("").getAbsolutePath();
+        /*String userDirectory = new File("").getAbsolutePath();
         System.out.println(userDirectory);
 
         Set<String> nameFile = this.listFilesUsingJavaIO(userDirectory + "/storage");
-        System.out.println(nameFile);
+        System.out.println(nameFile);*/
 
-        for (String item : nameFile) {
-            /*String url = userDirectory + "/storage/" + item;
-            System.out.println(url);*/
+        /*for (String item : nameFile) {
+            *//*String url = userDirectory + "/storage/" + item;
+            System.out.println(url);*//*
 
             for (Cadr searchItem : cadr) {
                 if(searchItem.getName().equals(item)){
@@ -69,9 +69,9 @@ public class CadrServiceFakeImpl implements ICadrService {
                 }
             }
 
-            /*BufferedImage image = ImageIO.read(new File(url));
-            System.out.println(image);*/
-        }
+            *//*BufferedImage image = ImageIO.read(new File(url));
+            System.out.println(image);*//*
+        }*/
         return cadr;
     }
 

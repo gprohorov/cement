@@ -22,7 +22,7 @@ public class ProcessingControllerREST {
     ProcessingServiceFakeImpl service;
 
     @RequestMapping("/get/list")
-    List<Processing> getAll() {
+    List<Processing> getAll() throws IOException, TesseractException {
         return service.getAll();
     }
 

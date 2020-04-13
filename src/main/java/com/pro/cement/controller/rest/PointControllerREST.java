@@ -3,6 +3,7 @@ package com.pro.cement.controller.rest;
 
 import com.pro.cement.model.Point;
 import com.pro.cement.service.point.interfaces.IPointService;
+import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +29,7 @@ public class PointControllerREST {
 
 
     @RequestMapping("/get/list")
-    List<Point> getAll() throws IOException {
+    List<Point> getAll() throws IOException, TesseractException {
         return service.getAll();
     }
 

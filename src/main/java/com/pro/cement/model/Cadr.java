@@ -103,7 +103,7 @@ public class Cadr {   //  кадр, который снимает камеры �
     }
 
     public Path getUrl(){
-        return Paths.get(this.getPath().toString(), this.getName());
+        return Paths.get(this.getPath(), this.getName());
     }
 
     @Override
