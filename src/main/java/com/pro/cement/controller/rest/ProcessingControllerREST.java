@@ -31,9 +31,14 @@ public class ProcessingControllerREST {
         return service.get(id);
     }
 
-    @RequestMapping("/success")
+    @RequestMapping("/test")
     String success() throws IOException, TesseractException {
-        return service.identifyOne("c0.png");
+        return service.identifyOne("pf04.png");
+    }
+
+    @RequestMapping("/list")
+    List<Processing> processAll() throws IOException, TesseractException {
+        return service.identifyDirectory();
     }
 
 }

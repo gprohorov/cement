@@ -1,5 +1,6 @@
 package com.pro.cement.service.processing.impls;
 
+import com.pro.cement.model.Cadr;
 import com.pro.cement.model.Processing;
 import com.pro.cement.service.cadr.impls.CadrServiceFakeImpl;
 import com.pro.cement.service.processing.interfaces.IProcessingService;
@@ -7,12 +8,12 @@ import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 import net.sourceforge.tess4j.Tesseract;
@@ -31,18 +32,48 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
         String userDirectory = new File("").getAbsolutePath();
         this.testdata  = userDirectory + "/testdata";
         this.tesseract =  new Tesseract();
-        this.dir = userDirectory + "/storage";
+        this.dir = userDirectory ;
         tesseract.setDatapath(this.testdata);
         tesseract.setLanguage("digits_comma");
       //  tesseract.setPageSegMode(1);
        // tesseract.setOcrEngineMode(1);
     }
 
+    public List<Processing> identifyDirectory() throws IOException, TesseractException{
+
+        List<Cadr>  cadrs = cadrService.getAll();
+        List<Processing> processings = new ArrayList<>();
+        AtomicReference<String> recognition = new AtomicReference<>("Failed");
+
+        cadrs.stream().forEach(cadr -> {
+
+            String url = cadr.getUrl().toString();
+            try {
+                recognition.set(this.identifyOne(url));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TesseractException e) {
+                e.printStackTrace();
+            }
+            System.out.println(recognition.toString());
+            Processing processing = new Processing( cadr,  recognition.toString().replace("\n","") );
+           processing.setQuality(100);
+           processing.setSuccess(true);
+           processing.setTime(LocalDateTime.now());
+
+            processings.add(processing);
+
+        });
+
+        return  processings;
+    }
+
 
     public String identifyOne(String img) throws IOException, TesseractException {
 
         String userDirectory = new File("").getAbsolutePath();
-        System.out.println(userDirectory);
+       // System.out.println(userDirectory);
+       // String url =  img;
         String url = this.dir + "/" + img;
        // BufferedImage image = ImageIO.read(new File(url));
         //System.out.println(image.getHeight());
@@ -51,6 +82,7 @@ public class ProcessingServiceFakeImpl implements IProcessingService {
     }
 
     private String thesaurus(String url) throws TesseractException {
+        System.out.println(url);
         File file = new File(url);
         String text  = tesseract.doOCR(file);
 

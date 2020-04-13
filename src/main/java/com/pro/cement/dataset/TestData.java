@@ -41,11 +41,11 @@ public class TestData {
             Arrays.asList(
 
 
-                    new Cadr("1", "c1.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
-                    new Cadr("2", "c2.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
-                    new Cadr("3", "c3.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
-                    new Cadr("4", "c4.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
-                    new Cadr("5", "c5.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage"))
+                    new Cadr("1", "pf04.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("2", "pf07.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("3", "pf16.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("4", "pf18.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage")),
+                    new Cadr("5", "pf29.png", LocalDateTime.now(), cameras.get(0), Paths.get("/storage"))
             )
 
     );
