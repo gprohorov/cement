@@ -30,7 +30,11 @@
             <tr class="thead-dark">
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col"></th>
+                <th scope="col">Date</th>
+                <th scope="col">Image</th>
+                <th scope="col">Camera</th>
+                <th scope="col">Point</th>
+                <th scope="col">View</th>
 
                 <th scope="col">Delete</th>
             </tr>
@@ -38,8 +42,12 @@
                 <tr>
                     <td>${cadr.id}</td>
                     <td>${cadr.name}</td>
+                    <td>${cadr.time}</td>
                     <#assign imageGender= "${cadr.path}">
                     <td><img src="${imageGender}" width="150px" height="50px" type="image/png" alt=""></td>
+                    <td>${cadr.camera.name}</td>
+                    <td>${cadr.camera.point.name}</td>
+                    <td>${cadr.camera.view}</td>
 
                     <td><a href="/web/Cadr/delete/${cadr.id}" type="button" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete ?');"><i class="fa fa-trash"></i></a></td>
                 </tr>
