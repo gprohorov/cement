@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -21,7 +22,7 @@ public class PointControllerWEB {
     IPointService service;
 
     @RequestMapping("/get/list")
-    String showAll(Model model) {
+    String showAll(Model model) throws IOException {
         
         List<Point> list = service.getAll();
         model.addAttribute("list", list);

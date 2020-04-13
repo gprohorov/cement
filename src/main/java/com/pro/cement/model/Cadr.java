@@ -16,21 +16,21 @@ public class Cadr {   //  кадр, который снимает камеры �
     private String name;   //  в имени будет зашитo время кадра и камера, которая его сняла
     private LocalDateTime time;  //    время съема кадра. Точность милисекунды.
     private Camera camera;        //  камера, кторая сделала этот кадр
-    private Path path;            // папка, которая хранит этот JPEG кадр.
+    private String path;            // папка, которая хранит этот JPEG кадр.
     String desc;
     LocalDateTime createdAt;
     LocalDateTime modifiedAt;
 
     public Cadr() {}
 
-    public Cadr(String name, LocalDateTime time, Camera camera, Path path) {
+    public Cadr(String name, LocalDateTime time, Camera camera, String path) {
         this.name = name;
         this.time = time;
         this.camera = camera;
         this.path = path;
     }
 
-    public Cadr(String id, String name, LocalDateTime time, Camera camera, Path path) {
+    public Cadr(String id, String name, LocalDateTime time, Camera camera, String path) {
         this.id = id;
         this.name = name;
         this.time = time;
@@ -70,11 +70,11 @@ public class Cadr {   //  кадр, который снимает камеры �
         this.camera = camera;
     }
 
-    public Path getPath() {
+    public String getPath() {
         return path;
     }
 
-    public void setPath(Path path) {
+    public void setPath(String path) {
         this.path = path;
     }
 
